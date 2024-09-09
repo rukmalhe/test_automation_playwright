@@ -1,22 +1,119 @@
 ###### Playwright code samples with python #########
 
-# How to install playwright in VS-code
+#Pre requisits
+    install vs code
+    install python
+    install pip
+    set installation path in $PATH
 
-1. go to vs-code extention
-2. search playwright test for vs-code
-3. click install
-4. open the command in vs code and type >install Playwright
-5. Provide which browsers are instaling
-6. you can see playwright.yml file where installed commands
+# How to install playwright Pytest plugging in vscode
+    open an terminal in vscode
+    execute below command to install pytest pluging
+        pip install pytest-playwright
+    execute blow command to install required browsers
+        playwright install
+
+# How to upgrade playwright
+    pip install pytest-playwright playwright -U
 
 # How to run playwright code-generator in vs-code
 
-1. click Testing icon
-2. select "chromium" on projects, and click Record new under Tools
-3. It will open the browser, then you can go to the webapplication and 
-the recording will be started in a new test file
-4. what options can be seen in the tool ? 
-    a. pick locator - able to get the path of the element
-    b. assert visibility - 
-    c. assert txt
-    d. assert for value
+# Test prefix
+    test_
+
+# How to run test headless mode
+    pytest
+
+# How to run test in headed mode?
+    pytest --headed
+    or
+    pytest --headed --slowmo 1000
+
+    By default, Playwright runs tests in headless mode, in which the browser 
+    is not visibly rendered. Headless mode is faster than headed mode and thus ideal
+    for "real" testing (like in CI). However, headed mode is better when developing 
+    tests so that you can see what is happening.
+
+    The --slowmo option lets the caller set a hard sleep time after every Playwright call. 
+    For example, --slowmo 1000 will pause execution for 1 second (1000 ms) after each call. 
+    This option is a much better way to slow down tests than to add time.sleep(...) 
+    calls everywhere!
+
+
+# How to run in different browsers?
+    pytest --browser webkit
+    or
+    pytest --browser webkit --browser firefox
+
+# How to run test specifically?
+    pytest test_login.py    # running single test class
+    or
+    pytest tests/test_todo_page.py tests/test_landing_page.py   # running two test classes
+    or
+    pytest -k test_add_a_todo_item  # specific function only
+
+# How to run test in paralel?
+    # install below dependancy
+    pip install pytest-xdist
+    # execute below command to run test in two cpu's
+    pytest --numprocesses 2
+
+
+# How to pause and record?
+    use     page.pause() methord to stop the script, and record the rest of the step from
+    inspector window.
+
+# How playwright wait untill elements are ready?
+Playwright automatically waits for elements to be ready before interacting with them. 
+So, even though the test does not perform any explicit waiting for the result page, 
+the expect function performs implicit waiting for the element to satisfy the to_have_value 
+condition.
+
+# POM ########
+A Page Object models the user interface (UI) elements as objects within the test code.
+ This helps eliminate redundant code and ensures that any updates to the UI require 
+ modifications in only one place.
+
+The Page Object is a widely-used design pattern in test automation, aimed at improving 
+test maintainability and reducing code duplication. It involves creating an object-oriented 
+class that acts as an interface to a specific page of the application under test (AUT). 
+Tests interact with the UI through the methods defined in the Page Object class, simplifying 
+the process. If the UI for that page changes, only the Page Object class needs to be updated, 
+keeping all modifications centralized and minimizing changes to the actual test scripts.
+
+This sample project interact with two pages, search page and results page
+
+Each page should have its own dedicated class. These Page Object classes should be placed in a 
+separate package outside of the test directory, allowing them to be imported and used within 
+the test scripts.
+
+Folder Structure
+================
+test_automation_playright
+├── pages
+│   ├── __init__.py
+│   ├── search.py
+│   └── result.py
+└── tests
+    └── test_search.py
+
+The __init__.py file converts the pages directory into a Python package, 
+enabling other modules to import it. This file will remain empty.
+ The search.py and result.py modules will hold the Page Object classes for 
+ the search and result pages, respectively.
+
+Resources:
+
+# PlayWright cheat sheet for assertions
+    https://playwright.dev/python/docs/test-assertions
+
+# Testing site
+    https://symonstorozhenko.wixsite.com/website-1
+
+        symon.storozhenko@gmail.com
+        test123
+
+# How to uninstall playwright
+    npx playwright uninstall --all
+
+# POM : https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/
