@@ -1,4 +1,16 @@
 ###### Playwright code samples with python #########
+####### Integrate into CI/CD pipeline in AWS CodePipeline ####
+
+# AWS Key Services: 
+1.	AWS CodeCommit,  (GitHub, Bitbucket)
+2.	CodePipeline, 
+3.	CodeBuild, (Jenkin CI)
+4.	CodeDeploy, (Jenkins, Spinnaker)
+5.	CodeStar, 
+6.	CoceArtifact, 
+7.	CodeGuru
+
+
 
 #Pre requisits
     install vs code
